@@ -20,7 +20,7 @@ const useSearchSameGen = ({
 }: UseSearchSameGen) => {
   const [friends, setFriends] = useState<ISearchFriend[]>([])
   const [keyword, setKeyword] = useState<string>('')
-  const lastFetchData = useRef({ keyword: '', lastPage: -1 })
+  const lastFetchData = useRef({ keyword: '' })
   const searchFriends = useCallback(
     async (keyword: string, page: number) => {
       if (!keyword) {
@@ -54,8 +54,7 @@ const useSearchSameGen = ({
   const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     async (event) => {
       event.preventDefault()
-      const input = event.target.value
-      setKeyword(input)
+      setKeyword(event.target.value)
     },
     []
   )
@@ -63,27 +62,16 @@ const useSearchSameGen = ({
     if (!keyword) {
       setFriends([])
     }
-    if (
-      keyword === lastFetchData.current.keyword &&
-      paginationData.page <= lastFetchData.current.lastPage
-    ) {
-      return
-    }
     if (lastFetchData.current.keyword !== keyword) {
       searchFriends(keyword, 0)
       lastFetchData.current.keyword = keyword
-      lastFetchData.current.lastPage = 0
       return
     }
-    if (
-      paginationData.page < paginationData.maxPage &&
-      lastFetchData.current.keyword === keyword
-    ) {
+    if (lastFetchData.current.keyword === keyword) {
       searchFriends(keyword, paginationData.page)
       lastFetchData.current.keyword = keyword
-      lastFetchData.current.lastPage = paginationData.page
     }
-  }, [paginationData.page, paginationData.maxPage, keyword, searchFriends])
+  }, [paginationData.page, keyword, searchFriends])
 
   return { friends, onInputChange }
 }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { throttle } from 'lodash'
+import { debounce } from 'lodash'
 
 export type PaginationData = {
   page: number
@@ -17,14 +17,17 @@ const usePagination = () => {
     if (!data) {
       return
     }
-    console.log('pagination data', data)
+    const { page, maxPage } = data
+    if (page && maxPage && page + 1 >= maxPage) {
+      return
+    }
     setPaginationData((prev) => ({
       maxPage: data.maxPage || prev.maxPage,
       page: data.page || prev.page
     }))
   }, [])
   const scrollFn = useRef(
-    throttle(() => {
+    debounce(() => {
       if (containerRef.current) {
         const pageYOffset = window.pageYOffset
         const currentY = window.screen.height
@@ -33,13 +36,13 @@ const usePagination = () => {
           let canFetchMore = true
           setPaginationData((prevState) => {
             const { page, maxPage } = prevState
-            canFetchMore = page < maxPage
+            canFetchMore = page + 1 < maxPage
             if (!canFetchMore) {
               return prevState
             }
             return { page: page + 1, maxPage }
           })
-          canFetchMore && window.scrollBy(0, -2000)
+          canFetchMore && window.scrollBy(0, -400)
         }
       }
     }, 500)
