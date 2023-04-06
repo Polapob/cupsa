@@ -84,9 +84,7 @@ class ApiService implements IApiService {
   }
 
   async viewFriend(id: string) {
-    const response = await this.client.get<IViewFriendResponse>(
-      `/friends/${id}`
-    )
+    const response = await this.client.get<IViewFriendResponse>(`/friend/${id}`)
     return response.data
   }
 }

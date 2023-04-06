@@ -5,6 +5,7 @@ import { theme } from './theme'
 import AuthProvider from './context/AuthContext'
 import HomePage from './pages/home'
 import SearchPage from './pages/search'
+import ViewFriendPage from './pages/viewFriend'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/view/:friendId" element={<ViewFriendPage />} />
           </Routes>
         </ThemeProvider>
       </AuthProvider>
