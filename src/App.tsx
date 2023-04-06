@@ -1,18 +1,24 @@
 import { ThemeProvider } from '@mui/material'
-import { RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
 import { theme } from './theme'
 import AuthProvider from './context/AuthContext'
-import router from './router'
+import HomePage from './pages/home'
+import SearchPage from './pages/search'
 
 function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search" element={<SearchPage />} />
+          </Routes>
+        </ThemeProvider>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

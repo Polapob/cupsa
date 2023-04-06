@@ -15,7 +15,6 @@ const SearchSameGen = ({ value }: ISearchSameGenProps) => {
     updatePagination,
     paginationData
   })
-
   return (
     <TabPanel key={value} index={0} value={value}>
       <Stack

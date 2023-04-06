@@ -1,13 +1,19 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Stack from '@mui/material/Stack'
 import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import ScrollableTabs from '../../components/features/search/ScrollableTabs'
+import SearchSameGen from '../../components/features/search/SearchSameGen'
 
 const SearchPage = () => {
   const { user } = useContext(AuthContext)
   return (
-    <Stack display="flex" justifyContent="center" alignItems={'center'}>
+    <Stack
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      width="100%"
+    >
       <Stack
         display="flex"
         alignItems="center"
@@ -15,16 +21,24 @@ const SearchPage = () => {
         paddingY="24px"
         paddingX="12px"
         maxWidth={{ lg: 800 }}
+        minWidth={{ lg: '500px' }}
+        width="90%"
         onScroll={() => {
           console.log('is scrolled V3')
         }}
       >
-        <Typography fontSize="24px">
+        <Typography fontSize="24px" width="100%" textAlign="center">
           {user.isGeneralMember
             ? 'หน้าค้นหาเพื่อนสำหรับสามัญสมาชิก'
             : 'หน้าค้นหาเพื่อนในรุ่นเดียวกัน'}
         </Typography>
-        {user.isGeneralMember ? <ScrollableTabs /> : <div></div>}
+        {user.isGeneralMember ? (
+          <ScrollableTabs />
+        ) : (
+          <Box width="100%">
+            <SearchSameGen value={0} />
+          </Box>
+        )}
       </Stack>
     </Stack>
   )
