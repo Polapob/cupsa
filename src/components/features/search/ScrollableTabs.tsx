@@ -30,9 +30,9 @@ const ScrollableTabs = () => {
         <Tab label="หาเพื่อนต่างรุ่น" sx={{ fontSize: '16px' }} />
         <Tab label="หาเพื่อนตามรุ่นที่ระบุ" sx={{ fontSize: '16px' }} />
       </Tabs>
-      <SearchSameGen value={value} />
-      <SearchAllGen value={value} />
-      <SearchSpecificGen value={value} />
+      {value === 0 && <SearchSameGen value={value} />}
+      {value === 1 && <SearchAllGen value={value} />}
+      {value === 2 && <SearchSpecificGen value={value} />}
     </Box>
   )
 }

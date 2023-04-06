@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { PaginationData } from './usePagination'
 import { ISearchFriend } from '../models/searchFriend'
 import { apiService } from '../services'
-import { PaginationData } from './usePagination'
 import { debounce } from 'lodash'
 
 interface UseSearchSameGen {
@@ -9,19 +9,20 @@ interface UseSearchSameGen {
   paginationData: PaginationData
 }
 
-const useSearchSameGen = ({
-  paginationData,
-  updatePagination
+const useSearchAllGen = ({
+  updatePagination,
+  paginationData
 }: UseSearchSameGen) => {
   const [friends, setFriends] = useState<ISearchFriend[]>([])
   const [keyword, setKeyword] = useState<string>('')
   const lastKeyword = useRef('')
+
   const searchFriends = useCallback(
     async (keyword: string, page: number) => {
       if (!keyword) {
         return
       }
-      const response = await apiService.searchFriendInSameGeneration({
+      const response = await apiService.searchFriendWithPrevillege({
         keyword,
         limit: 50,
         offset: page * 50
@@ -34,11 +35,11 @@ const useSearchSameGen = ({
       })
       const maxPage = Math.ceil(struct.all / 50)
       if (page === 0) {
-        updatePagination && updatePagination({ maxPage, page })
+        updatePagination && updatePagination({ maxPage })
         setFriends(friendResult)
         return
       }
-      updatePagination && updatePagination({ maxPage, page })
+      updatePagination && updatePagination({ maxPage })
 
       setFriends((prevFriends) => {
         return [...prevFriends, ...friendResult]
@@ -46,8 +47,9 @@ const useSearchSameGen = ({
     },
     [updatePagination]
   )
+
   const onInputChange = useRef(
-    debounce((event: ChangeEvent<HTMLInputElement>) => {
+    debounce(async (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
       setKeyword(event.target.value)
     }, 500)
@@ -78,4 +80,4 @@ const useSearchSameGen = ({
   return { friends, onInputChange }
 }
 
-export default useSearchSameGen
+export default useSearchAllGen

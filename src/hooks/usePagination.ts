@@ -11,20 +11,21 @@ const usePagination = () => {
     page: 0,
     maxPage: 1
   })
-  console.log('pg data =', paginationData)
+  console.log(paginationData)
   const containerRef = useRef<HTMLDivElement>(null)
   const updatePagination = useCallback((data: Partial<PaginationData>) => {
     if (!data) {
       return
     }
-    const { page, maxPage } = data
-    if (page && maxPage && page + 1 >= maxPage) {
-      return
-    }
-    setPaginationData((prev) => ({
-      maxPage: data.maxPage || prev.maxPage,
-      page: data.page || prev.page
-    }))
+    setPaginationData((prev) => {
+      const prevMaxPage = prev.maxPage
+      const prevPage = prev.page
+      const { page, maxPage } = data
+      return {
+        maxPage: data.maxPage || prevMaxPage,
+        page: Math.min(page || prevPage, (maxPage || prevMaxPage) - 1)
+      }
+    })
   }, [])
   const scrollFn = useRef(
     debounce(() => {
@@ -33,16 +34,14 @@ const usePagination = () => {
         const currentY = window.screen.height
         const { clientHeight, offsetTop } = containerRef.current
         if (pageYOffset + currentY >= 0.9 * (clientHeight + offsetTop)) {
-          let canFetchMore = true
           setPaginationData((prevState) => {
             const { page, maxPage } = prevState
-            canFetchMore = page + 1 < maxPage
-            if (!canFetchMore) {
+            if (page >= maxPage - 1) {
               return prevState
             }
+            window.scrollBy(0, -1000)
             return { page: page + 1, maxPage }
           })
-          canFetchMore && window.scrollBy(0, -400)
         }
       }
     }, 500)
