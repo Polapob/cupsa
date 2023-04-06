@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     isGeneralMember: false,
     firstName: '',
     lastName: '',
-    generationId: -1
+    generationId: ''
   })
   const [isUpdate, setUpdate] = useState<boolean>(false)
   const refreshProfile = useCallback(() => {
