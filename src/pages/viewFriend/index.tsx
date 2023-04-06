@@ -30,43 +30,50 @@ const ViewFriendPage = () => {
   }
 
   return (
-    <Stack direction="row" justifyContent="center" alignItems="start">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '16px 12px',
-          maxWidth: { lg: '800px' },
-          width: '90%'
-        }}
+    <Box display="flex" justifyContent="center" alignItems="start">
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="start"
+        padding="24px 12px"
+        maxWidth={{ lg: '800px' }}
+        width="100%"
       >
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            navigate(-1)
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%'
           }}
-          sx={{ width: '80px', mb: '24px' }}
         >
-          <Typography color="secondary">Back</Typography>
-        </Button>
-        <Stack direction="column" spacing="24px" width="100%">
-          <InfoSection title="ข้อมูลทั่วไป" data={friend.generalInfo} />
-          {friend.systemInfo.isShowEducationInfo && (
-            <InfoSection title="ข้อมูลการศึกษา" data={friend.educationInfo} />
-          )}
-          {friend.systemInfo.isShowContactInfo && (
-            <InfoSection title="ข้อมูลการศึกษา" data={friend.contactInfo} />
-          )}
-          {friend.systemInfo.isShowAddressInfo && (
-            <InfoSection title="ข้อมูลการศึกษา" data={friend.addressInfo} />
-          )}
-          {friend.systemInfo.isShowOfficeInfo && (
-            <InfoSection title="ข้อมูลการศึกษา" data={friend.officeInfo} />
-          )}
-        </Stack>
-      </Box>
-    </Stack>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              navigate(-1)
+            }}
+            sx={{ width: '80px', mb: '24px' }}
+          >
+            <Typography color="secondary">Back</Typography>
+          </Button>
+          <Stack direction="column" spacing="24px" width="100%">
+            <InfoSection title="ข้อมูลทั่วไป" data={friend.generalInfo} />
+            {friend.systemInfo.isShowEducationInfo && (
+              <InfoSection title="ข้อมูลการศึกษา" data={friend.educationInfo} />
+            )}
+            {friend.systemInfo.isShowContactInfo && (
+              <InfoSection title="ข้อมูลการศึกษา" data={friend.contactInfo} />
+            )}
+            {friend.systemInfo.isShowAddressInfo && (
+              <InfoSection title="ข้อมูลการศึกษา" data={friend.addressInfo} />
+            )}
+            {friend.systemInfo.isShowOfficeInfo && (
+              <InfoSection title="ข้อมูลการศึกษา" data={friend.officeInfo} />
+            )}
+          </Stack>
+        </Box>
+      </Stack>
+    </Box>
   )
 }
 

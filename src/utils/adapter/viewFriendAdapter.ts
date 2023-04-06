@@ -2,7 +2,7 @@ import { IFriend } from '../../models/friend'
 import { pickBy } from 'lodash'
 
 const filterNull = <T extends Object>(data: T) => {
-  return { ...pickBy(data, (key) => key !== null) }
+  return { ...pickBy(data, (key) => key !== null && key !== '') }
 }
 
 const viewFriendAdapter = (friend: IFriend) => {
