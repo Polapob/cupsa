@@ -1,9 +1,10 @@
-import { SelectChangeEvent, Stack } from '@mui/material'
+import { Stack } from '@mui/material'
 import { StyledTextField } from '../../common/StyledTextField'
 import TabPanel from './TabPanel'
 import usePagination from '../../../hooks/usePagination'
 import Dropdown from './GenerationDropdown'
-import { useState } from 'react'
+import useSearchSpecificGen from '../../../hooks/useSearchSpecificGen'
+import SearchTable from './SearchTable'
 
 interface ISearchSpecificGenProps {
   value: number
@@ -11,11 +12,12 @@ interface ISearchSpecificGenProps {
 
 const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
   const { containerRef, paginationData, updatePagination } = usePagination()
-  const [generation, setGeneration] = useState<string>('')
-  const updateGeneration = (event: SelectChangeEvent) => {
-    setGeneration(event.target.value)
-  }
-  console.log('generation')
+  const { friends, onInputChange, updateGeneration, generation } =
+    useSearchSpecificGen({
+      paginationData,
+      updatePagination
+    })
+
   return (
     <TabPanel index={2} value={value}>
       <Stack
@@ -27,8 +29,10 @@ const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
         <StyledTextField
           id="specific-generation"
           label="พิมพ์ชื่อ หรือ นามสกุล เพื่อน"
+          onChange={onInputChange}
         />
         <Dropdown generation={generation} updateGeneration={updateGeneration} />
+        <SearchTable friends={friends} />
       </Stack>
     </TabPanel>
   )

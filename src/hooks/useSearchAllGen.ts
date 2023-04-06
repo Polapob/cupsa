@@ -65,10 +65,9 @@ const useSearchAllGen = ({
       lastKeyword.current = keyword
       return
     }
-    if (lastKeyword.current === keyword) {
-      searchFriends(keyword, paginationData.page)
-      lastKeyword.current = keyword
-    }
+
+    searchFriends(keyword, paginationData.page)
+    lastKeyword.current = keyword
   }, [paginationData.page, keyword, searchFriends])
 
   useEffect(() => {

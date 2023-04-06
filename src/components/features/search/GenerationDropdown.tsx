@@ -6,7 +6,9 @@ import {
   SelectChangeEvent
 } from '@mui/material'
 
-const AVAILABLE_GENERATION = Array.from(Array(100), (_, i) => i + 1)
+export const AVAILABLE_GENERATION = Array.from(Array(100), (_, i) =>
+  (i + 1).toString()
+)
 
 interface IDropdownProps {
   generation: string

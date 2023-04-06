@@ -20,7 +20,7 @@ const profileAdapter = (profile: IUser) => {
     consentG5: consent_g5 === '1',
     firstName: first_name,
     lastName: last_name,
-    generationId: parseInt(generation_id),
+    generationId: generation_id,
     isGeneralMember: is_member === '1'
   }
 }

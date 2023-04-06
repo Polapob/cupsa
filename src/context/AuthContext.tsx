@@ -16,7 +16,7 @@ export type UserProfileTypes = {
   consentG5: boolean
   firstName: string
   lastName: string
-  generationId: number
+  generationId: string
   isGeneralMember: boolean
 }
 
