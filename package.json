@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ignore-path .gitignore vite.config.ts"
+    "lint": "eslint . --ignore-path .gitignore vite.config.ts",
+    "prettier": "prettier --write ./public ./src"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -25,6 +26,7 @@
     "@babel/core": "^7.21.4",
     "@babel/plugin-syntax-flow": "^7.21.4",
     "@babel/plugin-transform-react-jsx": "^7.21.0",
+    "@prettier/plugin-xml": "^2.2.0",
     "@types/lodash": "^4.14.192",
     "@types/node": "^18.15.11",
     "@types/qs": "^6.9.7",
