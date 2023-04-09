@@ -10,16 +10,16 @@ import ViewFriendPage from './pages/viewFriend'
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
           <Navbar />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/view/:friendId" element={<ViewFriendPage />} />
           </Routes>
-        </ThemeProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

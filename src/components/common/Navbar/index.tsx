@@ -17,7 +17,8 @@ const Navbar = () => {
         minHeight: { xs: '60px' },
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
       <Box
@@ -25,7 +26,8 @@ const Navbar = () => {
           width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          maxWidth: { lg: '800px' }
         }}
       >
         <Stack direction="row" spacing="24px" alignItems="center">

@@ -15,6 +15,7 @@ const HomePage = () => {
       alignItems="center"
       rowGap="24px"
       padding="0px 16px"
+      border="2px solid black"
     >
       <Stack
         component="form"
@@ -23,7 +24,7 @@ const HomePage = () => {
         margin="32px 0px"
         spacing="36px"
         sx={{
-          maxWidth: { lg: '800px' },
+          maxWidth: '800px',
           width: '100%'
         }}
         onSubmit={login}
