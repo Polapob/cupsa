@@ -2,11 +2,12 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { StyledTextField } from '../../components/common/StyledTextField'
-import Button from '@mui/material/Button'
 import useLogin from '../../hooks/useLogin'
+import ButtonWithLoading from '../../components/features/login/ButtonWithLoading'
+import CustomizedSnackbar from '../../components/common/Snackbar/CustomizedSnackbar'
 
 const HomePage = () => {
-  const { login } = useLogin()
+  const { isLoading, snackbarInfo, login, onClose } = useLogin()
   return (
     <Box
       display="flex"
@@ -50,17 +51,9 @@ const HomePage = () => {
             sx={{ borderRadius: '8px', background: '#F3F3F3' }}
           />
         </Stack>
-        <Button type="submit" variant="contained" sx={{ padding: '12px 0px' }}>
-          <Typography
-            fontWeight="bold"
-            color="secondary"
-            textTransform="none"
-            borderRadius="8px"
-          >
-            Log In
-          </Typography>
-        </Button>
+        <ButtonWithLoading isLoading={isLoading} />
       </Stack>
+      <CustomizedSnackbar onClose={onClose} {...snackbarInfo} />
     </Box>
   )
 }
