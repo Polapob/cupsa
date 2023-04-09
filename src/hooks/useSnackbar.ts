@@ -19,7 +19,7 @@ const useSnackbar = () => {
     if (reason === 'clickaway') {
       return
     }
-    setSnackbarInfo((prevInfo) => ({ ...prevInfo, open: false, text: '' }))
+    setSnackbarInfo((prevInfo) => ({ ...prevInfo, open: false }))
   }
   return { snackbarInfo, onDisplay, onClose }
 }

@@ -1,7 +1,7 @@
 import Alert, { AlertColor } from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import Stack from '@mui/material/Stack'
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent } from 'react'
 
 interface ICustomizedSnackbarProps {
   open: boolean
