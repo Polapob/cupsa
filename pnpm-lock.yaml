@@ -8,6 +8,7 @@ specifiers:
   '@emotion/styled': ^11.10.6
   '@mui/icons-material': ^5.11.11
   '@mui/material': ^5.11.15
+  '@prettier/plugin-xml': ^2.2.0
   '@types/lodash': ^4.14.192
   '@types/node': ^18.15.11
   '@types/qs': ^6.9.7
@@ -51,6 +52,7 @@ devDependencies:
   '@babel/core': 7.21.4
   '@babel/plugin-syntax-flow': 7.21.4_@babel+core@7.21.4
   '@babel/plugin-transform-react-jsx': 7.21.0_@babel+core@7.21.4
+  '@prettier/plugin-xml': 2.2.0
   '@types/lodash': 4.14.192
   '@types/node': 18.15.11
   '@types/qs': 6.9.7
@@ -2025,6 +2027,13 @@ packages:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
 
+  /@prettier/plugin-xml/2.2.0:
+    resolution: {integrity: sha512-UWRmygBsyj4bVXvDiqSccwT1kmsorcwQwaIy30yVh8T+Gspx4OlC0shX1y+ZuwXZvgnafmpRYKks0bAu9urJew==}
+    dependencies:
+      '@xml-tools/parser': 1.0.11
+      prettier: 2.8.7
+    dev: true
+
   /@remix-run/router/1.5.0:
     resolution: {integrity: sha512-bkUDCp8o1MvFO+qxkODcbhSqRa6P2GXgrGZVpt0dCXNW2HCSCqYI0ZoAqEOSAjRWmmlKcYgFvN4B4S+zo/f8kg==}
     engines: {node: '>=14'}
@@ -2370,6 +2379,12 @@ packages:
       vite: 4.2.1_@types+node@18.15.11
     dev: true
 
+  /@xml-tools/parser/1.0.11:
+    resolution: {integrity: sha512-aKqQ077XnR+oQtHJlrAflaZaL7qZsulWc/i/ZEooar5JiWj1eLt0+Wg28cpa+XLney107wXqneC+oG1IZvxkTA==}
+    dependencies:
+      chevrotain: 7.1.1
+    dev: true
+
   /acorn-jsx/5.3.2_acorn@8.8.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -2643,6 +2658,12 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
+
+  /chevrotain/7.1.1:
+    resolution: {integrity: sha512-wy3mC1x4ye+O+QkEinVJkPf5u2vsrDIYW9G7ZuwFl6v/Yu0LwUuT2POsb+NUWApebyxfkQq6+yDfRExbnI5rcw==}
+    dependencies:
+      regexp-to-ast: 0.5.0
     dev: true
 
   /clsx/1.2.1:
@@ -4149,6 +4170,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
@@ -4255,6 +4282,10 @@ packages:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
     dependencies:
       '@babel/runtime': 7.21.0
+    dev: true
+
+  /regexp-to-ast/0.5.0:
+    resolution: {integrity: sha512-tlbJqcMHnPKI9zSrystikWKwHkBqu2a/Sgw01h3zFjvYrMxEDYHzzoMZnUrbIfpTFEsoRnnviOXNCzFiSc54Qw==}
     dev: true
 
   /regexp.prototype.flags/1.4.3:

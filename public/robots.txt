@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cupsa-polapob.vercel.app/sitemap.xml
