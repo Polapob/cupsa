@@ -17,8 +17,9 @@ const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
     isLoading,
     hasAllInputs,
     onInputChange,
-    updateGeneration,
-    generation
+    generation,
+    generationLists,
+    updateGeneration
   } = useSearchSpecificGen({
     paginationData,
     updatePagination
@@ -37,7 +38,11 @@ const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
           label="พิมพ์ชื่อ หรือ นามสกุล เพื่อน"
           onChange={onInputChange}
         />
-        <Dropdown generation={generation} updateGeneration={updateGeneration} />
+        <Dropdown
+          generation={generation}
+          updateGeneration={updateGeneration}
+          generationLists={generationLists}
+        />
         {hasAllInputs && (
           <SearchTable isLoading={isLoading} friends={friends} />
         )}

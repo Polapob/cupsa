@@ -21,6 +21,10 @@ export interface IViewFriendResponse {
   success: boolean
   result: IFriend
 }
+export interface IGetAllGenerationResponse {
+  success: boolean
+  result: string[]
+}
 
 export type SearchParams = {
   keyword: string

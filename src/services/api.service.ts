@@ -1,4 +1,5 @@
 import {
+  IGetAllGenerationResponse,
   IGetProfileResponse,
   ILoginResponse,
   IViewFriendResponse,
@@ -85,6 +86,13 @@ class ApiService implements IApiService {
 
   async viewFriend(id: string) {
     const response = await this.client.get<IViewFriendResponse>(`/friend/${id}`)
+    return response.data
+  }
+
+  async getAllGenerations() {
+    const response = await this.client.get<IGetAllGenerationResponse>(
+      '/generations'
+    )
     return response.data
   }
 }

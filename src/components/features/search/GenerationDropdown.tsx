@@ -6,16 +6,17 @@ import {
   SelectChangeEvent
 } from '@mui/material'
 
-export const AVAILABLE_GENERATION = Array.from(Array(100), (_, i) =>
-  (i + 1).toString()
-)
-
 interface IDropdownProps {
   generation: string
+  generationLists: string[]
   updateGeneration: (event: SelectChangeEvent) => void
 }
 
-const Dropdown = ({ generation, updateGeneration }: IDropdownProps) => {
+const Dropdown = ({
+  generation,
+  generationLists,
+  updateGeneration
+}: IDropdownProps) => {
   return (
     <div>
       <FormControl sx={{ width: '100%' }}>
@@ -30,7 +31,7 @@ const Dropdown = ({ generation, updateGeneration }: IDropdownProps) => {
           onChange={updateGeneration}
           sx={{ backgroundColor: '#F3F3F3' }}
         >
-          {AVAILABLE_GENERATION.map((genId) => {
+          {generationLists.map((genId) => {
             return (
               <MenuItem value={genId} key={genId}>
                 {genId}
