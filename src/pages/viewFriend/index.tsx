@@ -26,7 +26,7 @@ const ViewFriendPage = () => {
   }, [friendId])
 
   if (!friend) {
-    return
+    return <></>
   }
 
   return (
