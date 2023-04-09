@@ -15,7 +15,6 @@ const HomePage = () => {
       alignItems="center"
       rowGap="24px"
       padding="0px 16px"
-      border="2px solid black"
     >
       <Stack
         component="form"
