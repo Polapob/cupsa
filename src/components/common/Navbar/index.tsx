@@ -45,12 +45,22 @@ const Navbar = () => {
               fontSize: { lg: '16px', xs: '12px' }
             }}
           >
-            <Typography color="secondary" fontWeight="bold">
+            <Typography
+              color="secondary"
+              fontWeight="bold"
+              fontSize={{ lg: '16px', xs: '14px' }}
+            >
               {user.firstName}
             </Typography>
-            <Typography color="secondary">|</Typography>
+            <Typography color="secondary" fontSize={{ lg: '16px', xs: '14px' }}>
+              |
+            </Typography>
 
-            <Typography color="secondary" fontWeight="bold">
+            <Typography
+              color="secondary"
+              fontWeight="bold"
+              fontSize={{ lg: '16px', xs: '14px' }}
+            >
               {user.isGeneralMember ? 'สามัญสมาชิก' : 'ไม่เป็นสามัญสมาชิก'}
             </Typography>
             <Box
