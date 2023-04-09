@@ -51,7 +51,7 @@ const HomePage = () => {
             sx={{ borderRadius: '8px', background: '#F3F3F3' }}
           />
         </Stack>
-        <ButtonWithLoading isLoading={!isLoading} />
+        <ButtonWithLoading isLoading={isLoading} />
       </Stack>
       <CustomizedSnackbar onClose={onClose} {...snackbarInfo} />
     </Box>
