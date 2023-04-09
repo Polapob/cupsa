@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import SectionTable from './SectionTable'
 import infoSectionAdapater from '../../../utils/adapter/infosectionAdapter'
 
-type ViewFriendInfo = Omit<ViewFriend, 'systemInfo'>
+type ViewFriendInfo = Omit<ViewFriend, 'systemInfo' | 'imageURL1' | 'imageURL2'>
 export type InfoSectionData = ViewFriendInfo[keyof ViewFriendInfo]
 
 interface IInfoSectionProps {

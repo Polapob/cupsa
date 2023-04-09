@@ -36,11 +36,23 @@ const SectionTable = ({ rows }: ISectionTableProps) => {
       <Table sx={{ width: '100%' }} aria-label="customized table">
         <TableBody sx={{ width: '100%' }}>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+            <StyledTableRow
+              key={row.name}
+              sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}
+            >
+              <StyledTableCell
+                sx={{ gridColumn: 'span 2 / span 2' }}
+                component="th"
+                scope="row"
+              >
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="center">{row.value}</StyledTableCell>
+              <StyledTableCell
+                sx={{ gridColumn: 'span 1 / span 1' }}
+                align="left"
+              >
+                {row.value}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
