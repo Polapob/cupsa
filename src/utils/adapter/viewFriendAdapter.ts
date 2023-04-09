@@ -28,7 +28,13 @@ const viewFriendAdapter = (friend: IFriend) => {
     contactInfo: filterNull(contactInfo),
     educationInfo: filterNull(educationInfo),
     addressInfo: filterNull(addressInfo),
-    officeInfo: filterNull(officeInfo)
+    officeInfo: filterNull(officeInfo),
+    imageURL1:
+      generalInfo.image_url ||
+      'https://www.triamudom-alumni.org/member/pic_2/00.jpg',
+    imageURL2:
+      generalInfo.image_2_url ||
+      'https://www.triamudom-alumni.org/member/pic_2/00.jpg'
   }
 }
 

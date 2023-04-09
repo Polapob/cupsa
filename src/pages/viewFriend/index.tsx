@@ -7,6 +7,7 @@ import viewFriendAdapter, {
 } from '../../utils/adapter/viewFriendAdapter'
 import { Box, Button, Typography } from '@mui/material'
 import InfoSection from '../../components/features/viewFriend/InfoSection'
+import Avatar from '@mui/material/Avatar'
 
 const ViewFriendPage = () => {
   const [friend, setFriend] = useState<ViewFriend | undefined>(undefined)
@@ -39,13 +40,7 @@ const ViewFriendPage = () => {
         maxWidth={{ lg: '800px' }}
         width="100%"
       >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%'
-          }}
-        >
+        <Stack direction="column" spacing="24px" width="100%">
           <Button
             color="primary"
             variant="contained"
@@ -56,6 +51,12 @@ const ViewFriendPage = () => {
           >
             <Typography color="secondary">Back</Typography>
           </Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Avatar
+              src={friend.imageURL1}
+              sx={{ width: '150px', height: '150px', borderRadius: '12px' }}
+            />
+          </Box>
           <Stack direction="column" spacing="24px" width="100%">
             <InfoSection title="ข้อมูลทั่วไป" data={friend.generalInfo} />
             {friend.systemInfo.isShowEducationInfo && (
@@ -71,7 +72,7 @@ const ViewFriendPage = () => {
               <InfoSection title="ข้อมูลการศึกษา" data={friend.officeInfo} />
             )}
           </Stack>
-        </Box>
+        </Stack>
       </Stack>
     </Box>
   )
