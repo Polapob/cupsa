@@ -49,7 +49,7 @@ const Navbar = () => {
             <Typography color="secondary">|</Typography>
 
             <Typography color="secondary" fontWeight="bold">
-              {user.isGeneralMember ? 'เป็นสามัญสมาชิก' : 'ไม่เป็นสามัญสมาชิก'}
+              {user.isGeneralMember ? 'สามัญสมาชิก' : 'ไม่เป็นสามัญสมาชิก'}
             </Typography>
             <Box
               sx={{
