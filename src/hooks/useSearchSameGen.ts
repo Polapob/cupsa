@@ -15,34 +15,41 @@ const useSearchSameGen = ({
 }: UseSearchSameGen) => {
   const [friends, setFriends] = useState<ISearchFriend[]>([])
   const [keyword, setKeyword] = useState<string>('')
+  const [isLoading, setLoading] = useState<boolean>(false)
+  const hasKeyword = keyword !== ''
   const lastKeyword = useRef('')
   const searchFriends = useCallback(
     async (keyword: string, page: number) => {
-      if (!keyword) {
-        return
-      }
-      const response = await apiService.searchFriendInSameGeneration({
-        keyword,
-        limit: 50,
-        offset: page * 50
-      })
-      const {
-        result: { data, key_order, struct }
-      } = response
-      const friendResult = key_order.map((friendId) => {
-        return data[friendId]
-      })
-      const maxPage = Math.ceil(struct.all / 50)
-      if (page === 0) {
+      try {
+        setLoading(true)
+        if (!keyword) {
+          return
+        }
+        const response = await apiService.searchFriendInSameGeneration({
+          keyword,
+          limit: 50,
+          offset: page * 50
+        })
+        const {
+          result: { data, key_order, struct }
+        } = response
+        const friendResult = key_order.map((friendId) => {
+          return data[friendId]
+        })
+        const maxPage = Math.ceil(struct.all / 50)
+        if (page === 0) {
+          updatePagination && updatePagination({ maxPage, page })
+          setFriends(friendResult)
+          return
+        }
         updatePagination && updatePagination({ maxPage, page })
-        setFriends(friendResult)
-        return
-      }
-      updatePagination && updatePagination({ maxPage, page })
 
-      setFriends((prevFriends) => {
-        return [...prevFriends, ...friendResult]
-      })
+        setFriends((prevFriends) => {
+          return [...prevFriends, ...friendResult]
+        })
+      } finally {
+        setLoading(false)
+      }
     },
     [updatePagination]
   )
@@ -74,7 +81,7 @@ const useSearchSameGen = ({
     }
   }, [onInputChange])
 
-  return { friends, onInputChange }
+  return { friends, isLoading, hasKeyword, onInputChange }
 }
 
 export default useSearchSameGen

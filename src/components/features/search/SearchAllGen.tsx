@@ -11,7 +11,7 @@ interface ISearchAllGenProps {
 
 const SearchAllGen = ({ value }: ISearchAllGenProps) => {
   const { containerRef, paginationData, updatePagination } = usePagination()
-  const { friends, onInputChange } = useSearchAllGen({
+  const { friends, isLoading, hasKeyword, onInputChange } = useSearchAllGen({
     updatePagination,
     paginationData
   })
@@ -28,7 +28,7 @@ const SearchAllGen = ({ value }: ISearchAllGenProps) => {
           label="พิมพ์ชื่อ หรือ นามสกุล เพื่อน"
           onChange={onInputChange}
         />
-        <SearchTable friends={friends} />
+        {hasKeyword && <SearchTable isLoading={isLoading} friends={friends} />}
       </Stack>
     </TabPanel>
   )

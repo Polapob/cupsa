@@ -25,6 +25,7 @@ const ScrollableTabs = () => {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
+        sx={{ margin: '24px 0px 24px 0px' }}
       >
         <Tab label="หาเพื่อนในรุ่น" sx={{ fontSize: '16px' }} />
         <Tab label="หาเพื่อนต่างรุ่น" sx={{ fontSize: '16px' }} />

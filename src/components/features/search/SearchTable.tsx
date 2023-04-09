@@ -3,12 +3,16 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { ISearchFriend } from '../../../models/searchFriend'
 import SearchRow from './SearchRow'
+import CancelIcon from '@mui/icons-material/Cancel'
 
 interface ISearchTableProps {
   friends: ISearchFriend[]
+  isLoading: boolean
 }
 
-const SearchTable = ({ friends }: ISearchTableProps) => {
+const SearchTable = ({ friends, isLoading }: ISearchTableProps) => {
+  const isEmptyFriend = friends.length === 0 && !isLoading
+
   return (
     <Box
       sx={{
@@ -30,9 +34,27 @@ const SearchTable = ({ friends }: ISearchTableProps) => {
           <Typography>รุ่น</Typography>
         </Grid>
       </Grid>
-      {friends.map((friend: ISearchFriend) => {
-        return <SearchRow friend={friend} key={friend.student_id} />
-      })}
+
+      {isEmptyFriend ? (
+        <Box
+          sx={{
+            paddingY: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gapY: '12px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%'
+          }}
+        >
+          <CancelIcon fontSize="medium" />
+          <Typography>ไม่พบข้อมูลเพื่อนในฐานข้อมูล</Typography>
+        </Box>
+      ) : (
+        friends.map((friend: ISearchFriend) => {
+          return <SearchRow friend={friend} key={friend.student_id} />
+        })
+      )}
     </Box>
   )
 }

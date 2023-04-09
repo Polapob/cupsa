@@ -18,40 +18,48 @@ const useSearchSpecificGen = ({
 }: UseSearchSpecificGen) => {
   const [friends, setFriends] = useState<ISearchFriend[]>([])
   const [keyword, setKeyword] = useState<string>('')
+  const [isLoading, setLoading] = useState<boolean>(false)
   const { generation, updateGeneration } = useGeneration()
   const lastKeyword = useRef('')
   const lastGeneration = useRef('')
+  const hasAllInputs =
+    checkValidGen(AVAILABLE_GENERATION, generation) && keyword !== ''
 
   const searchFriends = useCallback(
     async (keyword: string, generation: string, page: number) => {
-      if (!keyword && checkValidGen(AVAILABLE_GENERATION, generation)) {
-        return
-      }
-      const response = await apiService.searchFriendWithPrevillege(
-        {
-          keyword,
-          limit: 50,
-          offset: page * 50
-        },
-        generation
-      )
-      const {
-        result: { data, key_order, struct }
-      } = response
-      const friendResult = key_order.map((friendId) => {
-        return data[friendId]
-      })
-      const maxPage = Math.ceil(struct.all / 50)
-      if (page === 0) {
+      try {
+        setLoading(true)
+        if (!keyword && checkValidGen(AVAILABLE_GENERATION, generation)) {
+          return
+        }
+        const response = await apiService.searchFriendWithPrevillege(
+          {
+            keyword,
+            limit: 50,
+            offset: page * 50
+          },
+          generation
+        )
+        const {
+          result: { data, key_order, struct }
+        } = response
+        const friendResult = key_order.map((friendId) => {
+          return data[friendId]
+        })
+        const maxPage = Math.ceil(struct.all / 50)
+        if (page === 0) {
+          updatePagination && updatePagination({ maxPage, page })
+          setFriends(friendResult)
+          return
+        }
         updatePagination && updatePagination({ maxPage, page })
-        setFriends(friendResult)
-        return
-      }
-      updatePagination && updatePagination({ maxPage, page })
 
-      setFriends((prevFriends) => {
-        return [...prevFriends, ...friendResult]
-      })
+        setFriends((prevFriends) => {
+          return [...prevFriends, ...friendResult]
+        })
+      } finally {
+        setLoading(false)
+      }
     },
     [updatePagination]
   )
@@ -87,7 +95,14 @@ const useSearchSpecificGen = ({
     }
   }, [onInputChange])
 
-  return { friends, onInputChange, generation, updateGeneration }
+  return {
+    friends,
+    isLoading,
+    hasAllInputs,
+    onInputChange,
+    generation,
+    updateGeneration
+  }
 }
 
 export default useSearchSpecificGen

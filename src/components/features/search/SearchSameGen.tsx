@@ -11,7 +11,7 @@ interface ISearchSameGenProps {
 
 const SearchSameGen = ({ value }: ISearchSameGenProps) => {
   const { containerRef, paginationData, updatePagination } = usePagination()
-  const { friends, onInputChange } = useSearchSameGen({
+  const { friends, isLoading, hasKeyword, onInputChange } = useSearchSameGen({
     updatePagination,
     paginationData
   })
@@ -29,7 +29,7 @@ const SearchSameGen = ({ value }: ISearchSameGenProps) => {
           label="พิมพ์ชื่อ หรือ นามสกุล เพื่อน"
           onChange={onInputChange}
         />
-        <SearchTable friends={friends} />
+        {hasKeyword && <SearchTable isLoading={isLoading} friends={friends} />}
       </Stack>
     </TabPanel>
   )

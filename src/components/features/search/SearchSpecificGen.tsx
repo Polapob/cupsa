@@ -12,11 +12,17 @@ interface ISearchSpecificGenProps {
 
 const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
   const { containerRef, paginationData, updatePagination } = usePagination()
-  const { friends, onInputChange, updateGeneration, generation } =
-    useSearchSpecificGen({
-      paginationData,
-      updatePagination
-    })
+  const {
+    friends,
+    isLoading,
+    hasAllInputs,
+    onInputChange,
+    updateGeneration,
+    generation
+  } = useSearchSpecificGen({
+    paginationData,
+    updatePagination
+  })
 
   return (
     <TabPanel index={2} value={value}>
@@ -32,7 +38,9 @@ const SearchSpecificGen = ({ value }: ISearchSpecificGenProps) => {
           onChange={onInputChange}
         />
         <Dropdown generation={generation} updateGeneration={updateGeneration} />
-        <SearchTable friends={friends} />
+        {hasAllInputs && (
+          <SearchTable isLoading={isLoading} friends={friends} />
+        )}
       </Stack>
     </TabPanel>
   )
