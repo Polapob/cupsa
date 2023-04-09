@@ -7,6 +7,8 @@ import {
 } from 'react'
 import { apiService } from '../services'
 import profileAdapter from '../utils/adapter/profileAdapter'
+import { AxiosError, isAxiosError } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export type UserProfileTypes = {
   consentG1: boolean
@@ -33,6 +35,7 @@ interface IAuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
+  const navigate = useNavigate()
   const [user, setUser] = useState<UserProfileTypes>({
     consentG1: false,
     consentG2: false,
@@ -50,12 +53,21 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [])
   useEffect(() => {
     const fetchProfile = async () => {
-      const { result } = await apiService.getProfile()
-
-      setUser(profileAdapter(result))
+      try {
+        const { result } = await apiService.getProfile()
+        setUser(profileAdapter(result))
+      } catch (err) {
+        if (isAxiosError(err)) {
+          const error: AxiosError<{ message: string; success: boolean }> = err
+          console.log(error)
+          if (error.response?.data.message === 'invalid authorization') {
+            navigate('/')
+          }
+        }
+      }
     }
     fetchProfile()
-  }, [isUpdate])
+  }, [isUpdate, navigate])
 
   return (
     <AuthContext.Provider value={{ user, refreshProfile }}>

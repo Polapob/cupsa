@@ -20,7 +20,6 @@ const ViewFriendPage = () => {
         return
       }
       const { result } = await apiService.viewFriend(friendId)
-      console.log(result)
       setFriend(viewFriendAdapter(result))
     }
     fetchFriend()

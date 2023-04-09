@@ -23,9 +23,6 @@ const SearchPage = () => {
         maxWidth={{ lg: 800 }}
         minWidth={{ lg: '500px' }}
         width="90%"
-        onScroll={() => {
-          console.log('is scrolled V3')
-        }}
       >
         <Typography fontSize="24px" width="100%" textAlign="center">
           {user.isGeneralMember

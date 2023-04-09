@@ -11,7 +11,6 @@ const usePagination = () => {
     page: 0,
     maxPage: 1
   })
-  console.log(paginationData)
   const containerRef = useRef<HTMLDivElement>(null)
   const updatePagination = useCallback((data: Partial<PaginationData>) => {
     if (!data) {
