@@ -18,8 +18,7 @@ const ButtonWithLoading = ({ isLoading }: IButtonWithLoadingProps) => {
       type="submit"
       variant="contained"
       sx={{
-        padding: '12px 0px',
-        maxHeight: '48px'
+        padding: '12px 0px'
       }}
       disabled={isLoading}
     >
@@ -29,7 +28,7 @@ const ButtonWithLoading = ({ isLoading }: IButtonWithLoadingProps) => {
         justifyContent="center"
         alignItems="center"
       >
-        {isLoading && <StyledCircularProgress />}
+        {isLoading && <StyledCircularProgress size="24px" />}
         <Typography
           fontWeight="bold"
           color="secondary"
