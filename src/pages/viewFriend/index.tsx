@@ -47,7 +47,7 @@ const ViewFriendPage = () => {
             onClick={() => {
               navigate(-1)
             }}
-            sx={{ width: '80px', mb: '24px' }}
+            sx={{ width: '80px', mb: { md: '24px' } }}
           >
             <Typography color="secondary">Back</Typography>
           </Button>
