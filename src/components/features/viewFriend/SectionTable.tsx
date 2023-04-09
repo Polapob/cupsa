@@ -12,7 +12,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 16
+    fontSize: { lg: '16px', xs: '14px' }
   }
 }))
 
@@ -38,7 +38,7 @@ const SectionTable = ({ rows }: ISectionTableProps) => {
           {rows.map((row) => (
             <StyledTableRow
               key={row.name}
-              sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}
+              sx={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}
             >
               <StyledTableCell
                 sx={{ gridColumn: 'span 2 / span 2' }}
@@ -48,7 +48,7 @@ const SectionTable = ({ rows }: ISectionTableProps) => {
                 {row.name}
               </StyledTableCell>
               <StyledTableCell
-                sx={{ gridColumn: 'span 1 / span 1' }}
+                sx={{ gridColumn: 'span 3 / span 3' }}
                 align="left"
               >
                 {row.value}
