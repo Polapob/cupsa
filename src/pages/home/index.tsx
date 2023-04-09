@@ -23,7 +23,7 @@ const HomePage = () => {
         margin="32px 0px"
         spacing="36px"
         sx={{
-          maxWidth: { lg: '800px' },
+          maxWidth: '800px',
           width: '100%'
         }}
         onSubmit={login}
