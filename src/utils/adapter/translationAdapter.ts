@@ -1,100 +1,77 @@
+const KEY_TRANSLATE_MAPPER: { [key: string]: string } = {
+  tu_id: 'เลขประจำตัวนักเรียน',
+  member_id: 'หมายเลขสามัญสมาชิก',
+  member_ref: 'หมายเลขอ้างอิง',
+  is_member: 'เป็นสามัญสมาชิก',
+  consent: 'อนุญาตให้เปิดเผยข้อมูลส่วนตัวบนเว็บไซต์หรือไม่?',
+  consent_g1: 'ต้องการเผยแพร่ข้อมูลเฉพาะ: ข้อมูลทั่วไป ',
+  consent_g2: 'ต้องการเผยแพร่ข้อมูลเฉพาะ: ข้อมูลการติดต่อ ',
+  consent_g3: 'ต้องการเผยแพร่ข้อมูลเฉพาะ: ข้อมูลการศึกษา ',
+  consent_g4: 'ต้องการเผยแพร่ข้อมูลเฉพาะ: ข้อมูลที่อยู่ ',
+  consent_g5: 'ต้องการเผยแพร่ข้อมูลเฉพาะ: ข้อมูลที่ทำงาน ',
+  student_id: 'ลำดับที่',
+  first_name: 'ชื่อ',
+  last_name: 'นามสกุล',
+  nick_name: 'ชื่อเล่น',
+  first_name_old: 'ชื่อ(สมัยเรียน)',
+  last_name_old: 'นามสกุล(สมัยเรียน)',
+  first_name_eng: 'ชื่อ(ภาษาอังกฤษ)',
+  last_name_eng: 'นามสกุล(ภาษาอังกฤษ)',
+  upload_picture: 'รูปถ่ายปัจจุบัน',
+  upload_picture_2: 'รูปถ่ายสมัยเรียน',
+  sex: 'เพศ',
+  prefix: 'คำนำหน้า',
+  prefix_eng: 'คำนำหน้า(ภาษาอังกฤษ)',
+  picture: 'รูปถ่าย',
+  generation_id: 'รุ่น',
+  generation_search: 'รุ่น',
+  m4_room_id: 'ห้อง ม.4',
+  m5_room_id: 'ห้อง ม.5 (มศ. 4)',
+  m6_room_id: 'ห้อง ม.6 (มศ. 5)',
+  education_detail: 'ประวัติการศึกษา',
+  email: 'อีเมล',
+  email2: 'อีเมลสำรอง',
+  mobile: 'โทรศัพท์มือถือ',
+  mobile2: 'โทรศัพท์มือถือ 2',
+  website: 'เว็บไซต์',
+  address1: 'ที่อยู่',
+  address2: 'ที่อยู่ (ต่อ)',
+  address_city_id: 'จังหวัด',
+  address_district_id: 'อำเภอ/เขต',
+  address_subdistrict_id: 'ตำบล/แขวง',
+  address_city: 'จังหวัด',
+  address_district: 'อำเภอ/เขต',
+  address_subdistrict: 'ตำบล/แขวง',
+  address_phone: 'โทรศัพท์บ้าน',
+  address_postcode: 'รหัสไปรษณีย์',
+  address_country: 'ประเทศ',
+  office1: 'ที่ทำงาน',
+  office2: 'ที่ทำงาน (ต่อ)',
+  office_city_id: 'จังหวัด',
+  office_district_id: 'อำเภอ/เขต',
+  office_subdistrict_id: 'ตำบล/แขวง',
+  office_city: 'จังหวัด',
+  office_district: 'อำเภอ/เขต',
+  office_subdistrict: 'ตำบล/แขวง',
+  office_phone: 'โทรศัพท์ที่ทำงาน',
+  office_postcode: 'รหัสไปรษณีย์',
+  office_country: 'ประเทศ',
+  job: 'อาชีพ',
+  position: 'ตำแหน่ง/สาขา',
+  active: 'สถานะ',
+  student_type: 'ประเภท',
+  student_type_number: 'ลำดับที่',
+  comment: 'Comment',
+  create_time: 'เพิ่มข้อมูลเมื่อ',
+  create_by: 'เพิ่มข้อมูลโดย',
+  update_time: 'แก้ไขข้อมูลเมื่อ',
+  update_by: 'แก้ไขข้อมูลโดย'
+}
+
 const translationAdapter = (key: string) => {
-  if (key === 'tu_id') {
-    return 'รหัสนักเรียนเตรียมอุดม'
+  if (KEY_TRANSLATE_MAPPER[key]) {
+    return KEY_TRANSLATE_MAPPER[key]
   }
-  if (key === 'first_name') {
-    return 'ชื่อจริง'
-  }
-  if (key === 'last_name') {
-    return 'นามสกุล'
-  }
-  if (key === 'nick_name') {
-    return 'ชื่อเล่น'
-  }
-  if (key === 'first_name_eng') {
-    return 'ชื่อจริง (ภาษาอังกฤษ)'
-  }
-  if (key === 'last_name_eng') {
-    return 'นามสกุล (ภาษาอังกฤษ)'
-  }
-  if (key === 'first_name_old') {
-    return 'ชื่อจริง (เก่า)'
-  }
-  if (key === 'last_name_old') {
-    return 'นามสกุล (เก่า)'
-  }
-  if (key === 'sex') {
-    return 'เพศ'
-  }
-  if (key === 'prefix') {
-    return 'คำนำหน้าชื่อ'
-  }
-  if (key === 'job') {
-    return 'อาชีพ'
-  }
-  if (key === 'position') {
-    return 'ตำแหน่ง'
-  }
-  if (key === 'email') {
-    return 'อีเมล'
-  }
-  if (key === 'mobile') {
-    return 'เบอร์โทรศัพท์'
-  }
-  if (key === 'website') {
-    return 'เว็ปไซต์'
-  }
-  if (key === 'generation_id') {
-    return 'รุ่นที่'
-  }
-  if (key === 'm4_room_id') {
-    return 'ห้องเรียน ม.4'
-  }
-
-  if (key === 'm5_room_id') {
-    return 'ห้องเรียน ม.5'
-  }
-
-  if (key === 'm6_room_id') {
-    return 'ห้องเรียน ม.6'
-  }
-
-  if (key === 'education_detail') {
-    return 'รายละเอียดข้อมูลทางการศึกษา'
-  }
-
-  if (key === 'office1') {
-    return 'ออฟฟิศที่ 1'
-  }
-
-  if (key === 'office2') {
-    return 'ออฟฟิศที่ 2'
-  }
-
-  if (key === 'office_city') {
-    return 'เมืองที่ทำงาน'
-  }
-
-  if (key === 'office_district') {
-    return 'ตำบลที่ทำงาน'
-  }
-
-  if (key === 'office_subdistrict') {
-    return 'อำเภอที่ทำงาน'
-  }
-
-  if (key === 'office_phone') {
-    return 'เบอร์ติดต่อออฟฟิศ'
-  }
-
-  if (key === 'office_postcode') {
-    return 'รหัสไปรษณีย์ออฟฟิศ'
-  }
-
-  if (key === 'office_country') {
-    return 'ประเทศที่ทำงาน'
-  }
-
   return key
 }
 
