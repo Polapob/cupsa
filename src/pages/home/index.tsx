@@ -5,9 +5,21 @@ import { StyledTextField } from '../../components/common/StyledTextField'
 import useLogin from '../../hooks/useLogin'
 import ButtonWithLoading from '../../components/features/login/ButtonWithLoading'
 import CustomizedSnackbar from '../../components/common/Snackbar/CustomizedSnackbar'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
   const { isLoading, snackbarInfo, login, onClose } = useLogin()
+  const { isSignIn } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isSignIn) {
+      navigate('search')
+    }
+  }, [isSignIn, navigate])
+
   return (
     <Box
       display="flex"

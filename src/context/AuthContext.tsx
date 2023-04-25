@@ -3,7 +3,8 @@ import {
   createContext,
   useCallback,
   useEffect,
-  useState
+  useState,
+  useMemo
 } from 'react'
 import { apiService } from '../services'
 import profileAdapter from '../utils/adapter/profileAdapter'
@@ -24,10 +25,14 @@ export type UserProfileTypes = {
 
 export const AuthContext = createContext<{
   user: UserProfileTypes
+  isSignIn: boolean
   refreshProfile: () => void
+  resetUser: () => void
 }>({
   user: {} as UserProfileTypes,
-  refreshProfile: () => {}
+  isSignIn: false,
+  refreshProfile: () => {},
+  resetUser: () => {}
 })
 
 interface IAuthProviderProps {
@@ -48,9 +53,27 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     generationId: ''
   })
   const [isUpdate, setUpdate] = useState<boolean>(false)
+  const isSignIn = useMemo(() => {
+    return !!(user.firstName && user.lastName && user.generationId)
+  }, [user])
+
   const refreshProfile = useCallback(() => {
     setUpdate((prev) => !prev)
   }, [])
+  const resetUser = useCallback(() => {
+    setUser({
+      consentG1: false,
+      consentG2: false,
+      consentG3: false,
+      consentG4: false,
+      consentG5: false,
+      isGeneralMember: false,
+      firstName: '',
+      lastName: '',
+      generationId: ''
+    })
+  }, [])
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -60,6 +83,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
         if (isAxiosError(err)) {
           const error: AxiosError<{ message: string; success: boolean }> = err
           console.log(error)
+
           if (error.response?.data.message === 'invalid authorization') {
             navigate('/')
           }
@@ -70,7 +94,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [isUpdate, navigate])
 
   return (
-    <AuthContext.Provider value={{ user, refreshProfile }}>
+    <AuthContext.Provider value={{ user, isSignIn, refreshProfile, resetUser }}>
       {children}
     </AuthContext.Provider>
   )

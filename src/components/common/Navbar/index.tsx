@@ -5,9 +5,14 @@ import Logo from './Logo'
 import { AuthContext } from '../../../context/AuthContext'
 import { useContext } from 'react'
 import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import LogoutIcon from '@mui/icons-material/Logout'
+import Tooltip from '@mui/material/Tooltip'
+import useLogout from '../../../hooks/useLogout'
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext)
+  const { user, isSignIn } = useContext(AuthContext)
+  const logout = useLogout()
   return (
     <AppBar
       position="static"
@@ -34,7 +39,7 @@ const Navbar = () => {
           <Logo />
         </Stack>
 
-        {user.generationId && (
+        {isSignIn && (
           <Box
             sx={{
               display: 'flex',
@@ -71,6 +76,11 @@ const Navbar = () => {
                 backgroundColor: user.isGeneralMember ? '#15C183' : '#EE4B2B'
               }}
             />
+            <Tooltip title="ออกจากระบบ">
+              <IconButton color="secondary" onClick={logout}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         )}
       </Box>
