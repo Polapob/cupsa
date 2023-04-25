@@ -14,10 +14,28 @@ const useSearchSameGen = ({
   updatePagination
 }: UseSearchSameGen) => {
   const [friends, setFriends] = useState<ISearchFriend[]>([])
+  const [initialResult, setInitialResult] = useState<ISearchFriend[]>([])
   const [keyword, setKeyword] = useState<string>('')
   const [isLoading, setLoading] = useState<boolean>(false)
   const hasKeyword = keyword !== ''
   const lastKeyword = useRef('')
+  const fetchInitialFriends = useCallback(async () => {
+    try {
+      const response = await apiService.searchFriendInSameGeneration({
+        keyword: '',
+        offset: 0,
+        limit: 20
+      })
+      const { data, key_order } = response.result
+      const friendResult = key_order.map((friendId) => {
+        return data[friendId]
+      })
+      setInitialResult(friendResult)
+    } catch (err) {
+      console.log(err)
+    }
+  }, [])
+
   const searchFriends = useCallback(
     async (keyword: string, page: number) => {
       try {
@@ -81,7 +99,15 @@ const useSearchSameGen = ({
     }
   }, [onInputChange])
 
-  return { friends, isLoading, hasKeyword, onInputChange }
+  useEffect(() => {
+    fetchInitialFriends()
+  }, [fetchInitialFriends])
+
+  return {
+    friends: hasKeyword ? friends : initialResult,
+    isLoading,
+    onInputChange
+  }
 }
 
 export default useSearchSameGen
